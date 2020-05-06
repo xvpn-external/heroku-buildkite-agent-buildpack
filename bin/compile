@@ -61,7 +61,7 @@ if [ ! -f "$env_dir/BUILDKITE_AGENT_TOKEN" ]; then
     echo "       This needs to be set in order for the Buildkite agent to run."
 fi
 
-mkdir -p $BUILD_DIR/.profile.d
-cat > "$BUILD_DIR/.profile.d/buildkite.sh" <<'PROFILE'
+mkdir -p $build_dir/.profile.d
+cat > "$build_dir/.profile.d/buildkite.sh" <<'PROFILE'
 export PATH="/app/.buildkite:$PATH"
 PROFILE
