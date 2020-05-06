@@ -37,7 +37,7 @@ RUBY
     else
         echo "-----> Installing Buildkite Agent $version"
         curl --silent -L -o "$file_name" -H 'Accept: application/octet-stream' "$url"
-        ln -s "$file_name" buildkite-agent-latest.tar.gz
+        ln -fs "$file_name" buildkite-agent-latest.tar.gz
     fi
 )
 
@@ -60,3 +60,8 @@ if [ ! -f "$env_dir/BUILDKITE_AGENT_TOKEN" ]; then
     echo "-----> WARNING: No BUILDKITE_AGENT_TOKEN environment variable set!"
     echo "       This needs to be set in order for the Buildkite agent to run."
 fi
+
+mkdir -p $BUILD_DIR/.profile.d
+cat > "$BUILD_DIR/.profile.d/buildkite.sh" <<'PROFILE'
+export PATH="/app/.buildkite:$PATH"
+PROFILE
